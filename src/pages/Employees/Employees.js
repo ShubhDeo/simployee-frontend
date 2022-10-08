@@ -6,6 +6,7 @@ function Employees() {
   const { id } = useParams();
   return (
     <div className="employees">
+      <h1>Employee DashBoard</h1>
       <PopupForm />
     </div>
   );
