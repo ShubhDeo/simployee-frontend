@@ -6,7 +6,7 @@ import RightSide from "../../Components/RightSide";
 
 function App() {
   return (
-    <div className="login" style={{ overflowStyle: 'none'}}>
+    <div className="login" style={{ overflowStyle: "none" }}>
       <Row className="landing">
         <Col>
           <LeftSide />
