@@ -15,7 +15,7 @@ function AdminDash() {
         <div className="text-center">
           <div className="Left" >
             <h4> Employees</h4>
-            <AddEmployee />
+            <AddEmployee value="add-employee-admin" />
             <br />
             <Pagination />
           </div>

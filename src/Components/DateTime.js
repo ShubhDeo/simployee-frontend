@@ -7,7 +7,7 @@ import {
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
 
-function DateTime({ value }) {
+function DateTime({ value,val }) {
   const [selectedDate, handleDateChange] = useState();
   var current = new Date();
   var prev = new Date();
@@ -23,6 +23,7 @@ function DateTime({ value }) {
             format="DD/MM/YYYY"
             maxDate={current}
             fullWidth={true}
+            disabled={val==="employee-dashboard"?true:false}
           />
         </MuiPickersUtilsProvider>
       ) : (
