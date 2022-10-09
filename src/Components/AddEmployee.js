@@ -27,7 +27,7 @@ const PopupForm = () => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton >
           <Modal.Title>Add Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -56,9 +56,11 @@ const PopupForm = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Contact</Form.Label>
+
               <br />
               <TextField
                 id="outlined-multiline-static"
+                type={"number"}
                 // label="Multiline"
 
                 fullWidth={true}
@@ -67,7 +69,6 @@ const PopupForm = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
-              <br />
               <TextField
                 id="outlined-multiline-static"
                 // label="Multiline"
@@ -94,12 +95,12 @@ const PopupForm = () => {
             <Form.Group className="mb-3">
               <Form.Label>Department</Form.Label>
               <br />
-              <TextField
-                id="outlined-multiline-static"
-                // label="Multiline"
-
-                fullWidth={true}
-              />
+              <Select fullWidth={true}>
+                <MenuItem value={10}>Accounting</MenuItem>
+                <MenuItem value={20}>Human Resource</MenuItem>
+                <MenuItem value={30}>Sales</MenuItem>
+                <MenuItem value={40}>Technology</MenuItem>
+              </Select>
             </Form.Group>
 
             {/* DateTime */}

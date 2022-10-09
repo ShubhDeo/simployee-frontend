@@ -42,7 +42,7 @@ const columns = [
 
 export default function App() {
   return (
-    <div style={{ marginRight: "20%" }}>
+    <div style={{ marginRight: "2%", marginLeft: "2%" }}>
       <BootstrapTable
         bootstrap4
         keyField="id"
