@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <div className="login" id="bg">
-      <Card id="card" className=" ">
+      <Card id="card">
         <div className="mb-5 p-3" id="content">
           <h1 className="text-center">Sign In</h1>
           <br />

@@ -5,6 +5,7 @@ import Piechart from "../../Components/Piechart";
 import DateTime from "../../Components/DateTime";
 import { Barchart } from "../../Components/Barchart";
 import AddEmployee from "../../Components/AddEmployee";
+import EmployeeNav from "../../Components/EmployeeNav";
 
 function Employees() {
   const data = [
@@ -49,34 +50,34 @@ function Employees() {
   const [info, setInfo] = useState();
   const value = "employee-dashboard";
   return (
-    <div className="employees">
-      <h1>Employee DashBoard</h1>
-      <div style={{ display: "flex",justifyContent:'center',alignItems:'center'}}>
-        {/* Pop-up form */}
-        <div>
-          <PopupForm />
-        </div>
+    <div style={{ height: "100vh" }} className="employees" id="employee-bg">
+      <EmployeeNav />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <div>
           <DateTime value={value} />
         </div>
-        <div>
-          <AddEmployee value={value} />
-        </div>
       </div>
-
-      {/* Pie Chart */}
-      <div style={{ display: "flex" }}>
-        <div style={{ height: "40vh", width: "50%" }}>
+      <div style={{ display: "flex", justifyContent: "space" }}>
+        {/* Pie Chart */}
+        {/* <div style={{ display: "flex" }}> */}
+        <div style={{ height: "40vh", width: "30%" }}>
           <Piechart data={data} />
         </div>
-        <div style={{ height: "40vh", width: "50%" }}>
+        <div style={{ height: "40vh", width: "30%" }}>
           <Piechart data={data} />
         </div>
-      </div>
+        {/* </div> */}
 
-      {/* Bar Chart */}
-      <div style={{ height: "40vh", width: "50%" }}>
-        <Barchart data={data2} />
+        {/* Bar Chart */}
+        <div style={{ height: "40vh", width: "40%" }}>
+          <Barchart data={data2} />
+        </div>
       </div>
     </div>
   );

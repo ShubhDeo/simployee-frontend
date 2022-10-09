@@ -25,7 +25,12 @@ const PopupForm = ({ value }) => {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="transparent"
+        className="text-black"
+        style={{ border: "none" }}
+        onClick={handleShow}
+      >
         {value === "employee-dashboard" ? "Edit Details" : "Add Employees"}
       </Button>
 
@@ -102,7 +107,7 @@ const PopupForm = ({ value }) => {
               <></>
             )}
 
-            {selected == true || value === "add-employee-admin" ? (
+            {selected === true || value === "add-employee-admin" ? (
               <>
                 <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
@@ -132,7 +137,7 @@ const PopupForm = ({ value }) => {
               <></>
             )}
 
-            {value === "employee-dashboard" && selected == true ? (
+            {value === "employee-dashboard" && selected === true ? (
               <Form.Group className="mb-3">
                 <Form.Label>Confirm Password</Form.Label>
                 <TextField
@@ -160,7 +165,7 @@ const PopupForm = ({ value }) => {
               <></>
             )}
 
-            {selected == false ? (
+            {selected === false ? (
               <>
                 <Form.Group className="mb-3">
                   <Form.Label>Department</Form.Label>

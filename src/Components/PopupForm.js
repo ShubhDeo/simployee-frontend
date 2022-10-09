@@ -14,7 +14,12 @@ const PopupForm = () => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="transparent"
+        className="text-black "
+        style={{ marginRight: "10px", border: "none" }}
+        onClick={handleShow}
+      >
         Add Tasks
       </Button>
 

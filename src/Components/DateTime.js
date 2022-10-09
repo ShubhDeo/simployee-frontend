@@ -5,7 +5,12 @@ import {
   DatePicker,
 } from "@material-ui/pickers";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import TextField from '@mui/material/TextField';
 import MomentUtils from "@date-io/moment";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
 
 function DateTime({ value,val }) {
   const [selectedDate, handleDateChange] = useState();
@@ -13,10 +18,20 @@ function DateTime({ value,val }) {
   var prev = new Date();
   prev.setDate(prev.getDate() - 1);
   return (
-    <>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
       {value == "add-employee-admin"|| value=="employee-dashboard" ||value==="pagination" ? (
         <MuiPickersUtilsProvider utils={MomentUtils}>
-          <DatePicker
+          <DesktopDatePicker 
+          
+          inputFormat="MM/DD/YYYY"
+          value={selectedDate}
+          onChange={handleDateChange}
+          maxDate={current}
+          fullWidth={true}
+          disabled={val==="employee-dashboard"?true:false}
+          renderInput={(params) => <TextField {...params} />}
+        />
+          {/* <DatePicker
             inputVariant="outlined"
             value={selectedDate}
             onChange={handleDateChange}
@@ -24,7 +39,7 @@ function DateTime({ value,val }) {
             maxDate={current}
             fullWidth={true}
             disabled={val==="employee-dashboard"?true:false}
-          />
+          /> */}
         </MuiPickersUtilsProvider>
       ) : (
         <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -52,7 +67,7 @@ function DateTime({ value,val }) {
         disablePast
         format="yyyy/MM/dd HH:mm"
       /> */}
-    </>
+    </LocalizationProvider>
   );
 }
 
