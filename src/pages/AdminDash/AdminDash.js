@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Alert, Row, Col } from "react-bootstrap";
 import Pagination from "../../Components/Pagination";
-
+import AdminNav from "../../Components/AdminNav";
 import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
 import { useEffect } from "react";
@@ -51,14 +51,12 @@ function AdminDash() {
     }
   }, [employees]);
   return (
-    <div className="App">
+    <div className="App" id="admin-bg">
       <>
-        <h1>Admin Dashboard</h1>
-        <br />
+        <AdminNav employees={employees} setEmployees={setEmployees} />
         <div className="text-center">
           <div className="Left">
             <h4> Employees</h4>
-            <AddEmployee employees={employees} setEmployees={setEmployees} />
             <br />
             <Pagination
               employees={employees}

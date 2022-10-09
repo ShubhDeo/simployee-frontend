@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+#a-nav {
+  background-color: #074a98;
+  font-family: 'Poppins', sans-serif;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#a-nav-text {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+#nav-btn {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#admin-bg {
+height: 100vh;
+/* background-color: #d2deec; */
+}

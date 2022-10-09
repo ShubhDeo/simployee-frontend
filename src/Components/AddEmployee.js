@@ -79,7 +79,7 @@ const AddEmployee = ({ employees, setEmployees }) => {
 
   return (
     <>
-      <Button variant="primary" className="text-black" onClick={handleShow}>
+      <Button style={{border:"none"}} variant="transpaernt" className="text-black" onClick={handleShow}>
         Add Employees
       </Button>
       <Form>
