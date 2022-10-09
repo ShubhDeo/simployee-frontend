@@ -16,7 +16,9 @@ const PopupForm = ({ value }) => {
   const [show, setShow] = useState(false);
   //   const valueRef = useRef("add-employees");
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
 
   const [selected, setSelected] = useState(false);
