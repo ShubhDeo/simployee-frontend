@@ -11,8 +11,9 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import ToggleButton from "@mui/material/ToggleButton";
 import axios from "axios";
+import DateTimeAdmin from "./DateTimeAdmin";
 
-const PopupForm = ({ value }) => {
+const AddEmployee = ({ employees,setEmployees }) => {
   const [show, setShow] = useState(false);
   //   const valueRef = useRef("add-employees");
 
@@ -21,8 +22,41 @@ const PopupForm = ({ value }) => {
   };
   const handleShow = () => setShow(true);
 
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [contact, setContact] = useState();
+  const [password, setPassword] = useState();
+  const [dept, setDept] = useState();
+  const [joinDate, setJoinDate] = useState();
+  const handleAddEmployee = async (e) => {
+    e.preventDefault();
+    try{let response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_BASE}/api/user/add`,
+      {
+        name: name,
+        email: email,
+        contact: contact,
+        password: password,
+        dept: dept,
+        joinDate: joinDate,
+      }
+    );
+    let data = response.data;
+    console.log(data);
+    const tempData = await axios.get(`${process.env.REACT_APP_BACKEND_BASE}/api/user`,{
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+    setEmployees(tempData)
+    console.log(employees)
+  }
+    catch(e){
+      alert(e);
+    }
+  };
+
   const [selected, setSelected] = useState(false);
-  const form = useRef();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -36,41 +70,21 @@ const PopupForm = ({ value }) => {
       <Form>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>
-              {value === "employee-dashboard"
-                ? "Edit Details"
-                : "Add Employees"}
-            </Modal.Title>
+            <Modal.Title>Add Employees</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {value === "employee-dashboard" ? (
-              <Form.Group className="mb-3">
-                <ToggleButton
-                  value="check"
-                  selected={selected}
-                  onChange={() => {
-                    setSelected(!selected);
-                  }}
-                  color="primary"
-                >
-                  Change Password
-                </ToggleButton>
-              </Form.Group>
-            ) : (
-              <></>
-            )}
-            {selected == false ? (
-              <>
-                <Form.Group className="mb-3">
-                  <Form.Label>Name</Form.Label>
-                  <br />
-                  <TextField
-                    id="outlined-multiline-static"
-                    // label="Multiline"
-
-                    fullWidth={true}
-                  />
-                </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Name</Form.Label>
+              <br />
+              <TextField
+                // label="Multiline"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                fullWidth={true}
+              />
+            </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
@@ -84,7 +98,9 @@ const PopupForm = ({ value }) => {
                 //   },
                 // }}
                 value={email}
-                onChange={(e) => {setEmail(e.target.value)}}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
                 fullWidth={true}
               />
             </Form.Group>
@@ -98,9 +114,10 @@ const PopupForm = ({ value }) => {
                 type={"number"}
                 // label="Multiline"
                 value={contact}
-                onChange={(e) => {setContact(e.target.value)}}
+                onChange={(e) => {
+                  setContact(e.target.value);
+                }}
                 fullWidth={true}
-                
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -111,7 +128,9 @@ const PopupForm = ({ value }) => {
                 autoComplete="current-password"
                 fullWidth={true}
                 value={password}
-                onChange={(e) => {setPassword(e.target.value)}}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
                 InputProps={{
                   // <-- This is where the toggle button is added.
                   endAdornment: (
@@ -132,7 +151,14 @@ const PopupForm = ({ value }) => {
             <Form.Group className="mb-3">
               <Form.Label>Department</Form.Label>
               <br />
-              <Select id="employeeDepartment" fullWidth={true} value={dept} onChange={(e) => {setDept(e.target.value)}}>
+              <Select
+                id="employeeDepartment"
+                fullWidth={true}
+                value={dept}
+                onChange={(e) => {
+                  setDept(e.target.value);
+                }}
+              >
                 <MenuItem value={1}>Accounting</MenuItem>
                 <MenuItem value={2}>Human Resource</MenuItem>
                 <MenuItem value={3}>Sales</MenuItem>
@@ -140,25 +166,19 @@ const PopupForm = ({ value }) => {
               </Select>
             </Form.Group>
 
-                {/* DateTime */}
-                <Form.Group className="mb-3">
-                  <Form.Label>Joining Date</Form.Label>
-                  <br />
-                  <DateTime value="add-employee-admin" val={value} />
-                </Form.Group>
-              </>
-            ) : (
-              <></>
-            )}
+            {/* DateTime */}
+            <Form.Group className="mb-3">
+              <Form.Label>Joining Date</Form.Label>
+              <br />
+              <DateTimeAdmin joinDate={joinDate} setJoinDate={setJoinDate} />
+            </Form.Group>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button type="submit" variant="primary">
-              {value === "employee-dashboard"
-                ? "Update Changes"
-                : "Add Employee"}
+            <Button type="submit" onClick={handleAddEmployee} variant="primary">
+              Add Employee
             </Button>
           </Modal.Footer>
         </Modal>
@@ -167,4 +187,4 @@ const PopupForm = ({ value }) => {
   );
 };
 
-export default PopupForm;
+export default AddEmployee;

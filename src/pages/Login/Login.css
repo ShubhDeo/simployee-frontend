@@ -39,3 +39,23 @@
     /* margin:10%  auto 0 auto ; */
     width: 100%;
 }
+
+@media only screen and (max-device-width: 600px){
+    #card{
+        width: 80%;
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1024px){
+    #card{
+        height:95% ;
+        width: 50%;
+    }
+}
+
+/* @media only screen and (min-device-width: 768px){
+    #card{
+        height:65% ;
+        width: 60%;
+    }
+} */

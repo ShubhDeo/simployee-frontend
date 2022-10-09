@@ -5,6 +5,7 @@ import Piechart from "../../Components/Piechart";
 import DateTime from "../../Components/DateTime";
 import { Barchart } from "../../Components/Barchart";
 import AddEmployee from "../../Components/AddEmployee";
+import EditEmployeeDetails from "../../Components/EditEmployeeDetails";
 
 function Employees() {
   const data = [
@@ -47,7 +48,6 @@ function Employees() {
   ];
   const { id } = useParams();
   const [info, setInfo] = useState();
-  const value = "employee-dashboard";
   return (
     <div className="employees">
       <h1>Employee DashBoard</h1>
@@ -57,10 +57,10 @@ function Employees() {
           <PopupForm />
         </div>
         <div>
-          <DateTime value={value} />
+          <DateTime  />
         </div>
         <div>
-          <AddEmployee value={value} />
+          <EditEmployeeDetails />
         </div>
       </div>
 
