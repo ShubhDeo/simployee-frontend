@@ -60,6 +60,7 @@ const PopupForm = () => {
               <br />
               <TextField
                 id="outlined-multiline-static"
+                type={"number"}
                 // label="Multiline"
 
                 fullWidth={true}
@@ -68,11 +69,10 @@ const PopupForm = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
-              <br />
               <TextField
-                id="outlined-multiline-static"
-                // label="Multiline"
-
+                id="outlined-password-input"
+                type="password"
+                autoComplete="current-password"
                 fullWidth={true}
               />
             </Form.Group>
