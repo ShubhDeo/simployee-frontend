@@ -19,10 +19,10 @@ function DateTime({ value,val }) {
   prev.setDate(prev.getDate() - 1);
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      {value == "add-employee-admin"|| value=="employee-dashboard" ||value==="pagination" ? (
+      {value === "add-employee-admin"|| value==="employee-dashboard" ||value==="pagination" ? (
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DesktopDatePicker 
-          
+          label="Select Date"
           inputFormat="MM/DD/YYYY"
           value={selectedDate}
           onChange={handleDateChange}

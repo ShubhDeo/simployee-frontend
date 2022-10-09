@@ -60,7 +60,7 @@ function Employees() {
         }}
       >
         <div>
-          <DateTime />
+          <DateTime value={"employee-dashboard"} />
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
