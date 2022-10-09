@@ -25,7 +25,7 @@ const EditEmployeeDetails = ({ value }) => {
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   return (
     <>
-      <Button variant="transparent" className="text-black" onClick={handleShow}>
+      <Button variant="transparent" className="text-black" style={{border: "none"}} onClick={handleShow}>
         Edit Details
       </Button>
 

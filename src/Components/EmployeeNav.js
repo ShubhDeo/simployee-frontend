@@ -32,7 +32,7 @@ function EmployeeNav() {
               <EditEmployeeDetails />
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <Button onClick={handleClick} variant="transparent" className="text-black">
+              <Button onClick={handleClick} style={{border: "none"}} variant="transparent" className="text-black">
                 Logout
               </Button>
             </NavDropdown.Item>
