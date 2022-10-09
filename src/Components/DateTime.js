@@ -14,7 +14,7 @@ function DateTime({ value,val }) {
   prev.setDate(prev.getDate() - 1);
   return (
     <>
-      {value == "add-employee-admin"|| value=="employee-dashboard" ? (
+      {value == "add-employee-admin"|| value=="employee-dashboard" ||value==="pagination" ? (
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <DatePicker
             inputVariant="outlined"

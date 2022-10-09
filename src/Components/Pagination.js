@@ -6,6 +6,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
 import Piechart from "./Piechart";
 import { Barchart } from "./Barchart";
+import DateTime from "./DateTime";
 
 export const Pagination = (quantity) => {
   const items = [];
@@ -101,6 +102,9 @@ export default function App() {
           <Modal.Title>{modalInfo.id}</Modal.Title>
         </Modal.Header>
         <Modal.Body >
+          Select Date
+          <br /><br />
+          <DateTime val="pagination" value="pagination" />
           {/* Pie Chart */}
           <div style={{ display: "flex"}}>
             <div style={{ height: "40vh", width: "50%" }}>
