@@ -30,6 +30,26 @@ function AdminDash() {
   }, []);
 
   const [employees, setEmployees] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const [nonSelected, setNonSelected] = useState(null);
+
+  useEffect(() => {
+    if (employees) {
+      let selectedArray = [];
+      let nonSelectedArray = [];
+      employees.map((employee, index) => {
+        // console.log(localStorage.getItem("id"), employee._id);
+        if (employee.isActivated && localStorage.getItem("id") !== employee._id)
+          selectedArray.push(index);
+        else nonSelectedArray.push(index);
+        return null;
+      });
+      setSelected(selectedArray);
+      setNonSelected(nonSelectedArray);
+      console.log(selected);
+      console.log(nonSelected);
+    }
+  }, [employees]);
   return (
     <div className="App">
       <>
@@ -40,7 +60,14 @@ function AdminDash() {
             <h4> Employees</h4>
             <AddEmployee employees={employees} setEmployees={setEmployees} />
             <br />
-            <Pagination employees={employees} setEmployees={setEmployees} />
+            <Pagination
+              employees={employees}
+              setEmployees={setEmployees}
+              selected={selected}
+              setSelected={setSelected}
+              nonSelected={nonSelected}
+              setNonSelected={setNonSelected}
+            />
           </div>
         </div>
       </>

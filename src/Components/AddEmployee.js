@@ -28,31 +28,46 @@ const AddEmployee = ({ employees,setEmployees }) => {
   const [password, setPassword] = useState();
   const [dept, setDept] = useState();
   const [joinDate, setJoinDate] = useState();
+
+
   const handleAddEmployee = async (e) => {
     e.preventDefault();
     try{let response = await axios.post(
       `${process.env.REACT_APP_BACKEND_BASE}/api/user/add`,
       {
-        name: name,
+        username: name,
         email: email,
         contact: contact,
         password: password,
-        dept: dept,
-        joinDate: joinDate,
+        department: dept,
+        joiningDate: joinDate,
+        isAdmin: false
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        }
       }
     );
     let data = response.data;
     console.log(data);
-    const tempData = await axios.get(`${process.env.REACT_APP_BACKEND_BASE}/api/user`,{
+    let tempData = await axios.get(`${process.env.REACT_APP_BACKEND_BASE}/api/user`,{
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
-    setEmployees(tempData)
-    console.log(employees)
+    tempData = tempData.data
+    tempData.map((element,idx) => {
+      element.id = idx
+    });
+    setEmployees(tempData);
+    //console.log(employees)
+    handleClose();
+    alert("Employee added successfully")
+    console.log("Employee added successfully")
   }
     catch(e){
       alert(e);
+      handleClose()
     }
   };
 

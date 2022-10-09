@@ -25,7 +25,7 @@ const columns = [
   },
 ];
 
-export default function App({ employees, setEmployees }) {
+export default function App({ employees, setEmployees,selected,setSelected,nonSelected,setNonSelected }) {
   const data = [
     {
       id: "break",
@@ -66,8 +66,8 @@ export default function App({ employees, setEmployees }) {
   ];
 
   const [modalInfo, setModalInfo] = useState([]);
-  const [selected, setSelected] = useState(null);
-  const [nonSelected, setNonSelected] = useState(null);
+  // const [selected, setSelected] = useState(null);
+  // const [nonSelected, setNonSelected] = useState(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
