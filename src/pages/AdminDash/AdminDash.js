@@ -10,17 +10,22 @@ function AdminDash() {
     <div className="App">
       <>
         <h1>Admin Dashboard</h1>
+        <br />
 
-        <div className="d-flex">
-          <div className="Left">
+        <div className="text-center">
+          <div className="Left" >
             <h4> Employees</h4>
-            <Pagination />
             <AddEmployee />
+            <br />
+            <Pagination />
           </div>
 
-          <div className="right" style={{}}>
+          {/* <div
+            className="right"
+            style={{ marginRight: "5%", marginTop: "5%", textAlign: "left" }}
+          >
             <AdminLogo />
-          </div>
+          </div> */}
         </div>
       </>
     </div>
