@@ -27,7 +27,7 @@ const PopupForm = () => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton >
+        <Modal.Header closeButton>
           <Modal.Title>Add Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -71,9 +71,23 @@ const PopupForm = () => {
               <Form.Label>Password</Form.Label>
               <TextField
                 id="outlined-password-input"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
                 fullWidth={true}
+                InputProps={{
+                  // <-- This is where the toggle button is added.
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Form.Group>
 
