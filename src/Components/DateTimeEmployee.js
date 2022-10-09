@@ -6,6 +6,10 @@ import {
 } from "@material-ui/pickers";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 function DateTime({ joinDate, setJoinDate }) {
   var current = new Date();
@@ -14,16 +18,19 @@ function DateTime({ joinDate, setJoinDate }) {
   prev.setDate(prev.getDate() - 1);
   return (
     <>
-      <MuiPickersUtilsProvider utils={MomentUtils}>
-        <DatePicker
-          inputVariant="outlined"
-          value={joinDate}
-          onChange={(e)=>{setJoinDate(e._d)}}
-          format="DD/MM/YYYY"
-          maxDate={current}
-          fullWidth={true}
-        />
-      </MuiPickersUtilsProvider>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <DesktopDatePicker
+            label="Select Date"
+            inputFormat="MM/DD/YYYY"
+            value={joinDate}
+            onChange={setJoinDate}
+            maxDate={current}
+            fullWidth={true}
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </MuiPickersUtilsProvider>
+      </LocalizationProvider>
     </>
   );
 }
