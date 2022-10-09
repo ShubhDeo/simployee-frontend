@@ -60,7 +60,6 @@ const PopupForm = () => {
               <br />
               <TextField
                 id="outlined-multiline-static"
-                type={"number"}
                 // label="Multiline"
 
                 fullWidth={true}
@@ -69,25 +68,11 @@ const PopupForm = () => {
 
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
+              <br />
               <TextField
                 id="outlined-multiline-static"
                 // label="Multiline"
-                type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-                // onChange={someChangeHandler}
-                InputProps={{
-                  // <-- This is where the toggle button is added.
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
+
                 fullWidth={true}
               />
             </Form.Group>
