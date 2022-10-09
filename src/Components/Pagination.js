@@ -7,42 +7,25 @@ import { Modal, Button } from "react-bootstrap";
 import Piechart from "./Piechart";
 import { Barchart } from "./Barchart";
 import DateTime from "./DateTime";
-
-export const Pagination = (quantity) => {
-  const items = [];
-  for (let i = 0; i < quantity; i++) {
-    items.push({ id: i, name: `Item name ${i}`, price: 2100 + i });
-  }
-  return items;
-};
-
-const products = Pagination(100);
+import axios from "axios";
 
 const columns = [
   {
-    dataField: "id",
+    dataField: "username",
     text: "Employee Name",
     sort: true,
   },
   {
-    dataField: "name",
+    dataField: "email",
     text: "Email Id",
   },
   {
-    dataField: "price",
+    dataField: "contact",
     text: "Contact",
-  },
-  {
-    dataField: "price",
-    text: "Status",
-  },
-  {
-    dataField: "price",
-    text: "",
   },
 ];
 
-export default function App() {
+export default function App({ employees, setEmployees }) {
   const data = [
     {
       id: "break",
@@ -83,7 +66,8 @@ export default function App() {
   ];
 
   const [modalInfo, setModalInfo] = useState([]);
-
+  const [selected, setSelected] = useState(null);
+  const [nonSelected, setNonSelected] = useState(null);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
 
@@ -95,18 +79,69 @@ export default function App() {
     },
   };
 
+  const handleSelect = async (e) => {
+    console.log(e);
+    await axios.put(
+      `${process.env.REACT_APP_BACKEND_BASE}/api/user/deactivate/${e._id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    // let data = response.data;
+    let selectedArray = selected.slice(0);
+    let nonSelectedArray = nonSelected.slice(0);
+    let employeesArray = employees.slice(0);
+
+    let selectedArrayTemp = [];
+    selectedArray.map((selected, index) => {
+      if (index === e.id) selectedArrayTemp.push(index);
+      return null;
+    });
+
+    employeesArray.map((employee) => {
+      if (employee.id === e.id) employee.isActivated = false;
+      return null;
+    });
+
+    console.log(employeesArray);
+    nonSelectedArray.push(e.id);
+    setNonSelected(nonSelectedArray);
+    setSelected(selectedArrayTemp);
+    setEmployees(employeesArray);
+  };
+
+  useEffect(() => {
+    if (employees) {
+      let selectedArray = [];
+      let nonSelectedArray = [];
+      employees.map((employee, index) => {
+        // console.log(localStorage.getItem("id"), employee._id);
+        if (employee.isActivated && localStorage.getItem("id") !== employee._id)
+          selectedArray.push(index);
+        else nonSelectedArray.push(index);
+        return null;
+      });
+      setSelected(selectedArray);
+      setNonSelected(nonSelectedArray);
+    }
+  }, [employees]);
+
   const ModalContent = () => {
     return (
-      <Modal show={show} onHide={handleClose}  size = "lg">
+      <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
           <Modal.Title>{modalInfo.id}</Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body>
           Select Date
-          <br /><br />
+          <br />
+          <br />
           <DateTime val="pagination" value="pagination" />
           {/* Pie Chart */}
-          <div style={{ display: "flex"}}>
+          <div style={{ display: "flex" }}>
             <div style={{ height: "40vh", width: "50%" }}>
               <Piechart data={data} />
             </div>
@@ -114,7 +149,6 @@ export default function App() {
               <Piechart data={data} />
             </div>
           </div>
-
           {/* Bar Chart */}
           <div style={{ height: "40vh", width: "100%" }}>
             <Barchart data={data2} />
@@ -131,15 +165,24 @@ export default function App() {
 
   return (
     <div style={{ marginRight: "2%", marginLeft: "2%" }}>
-      <BootstrapTable
-        bootstrap4
-        keyField="id"
-        data={products}
-        columns={columns}
-        pagination={paginationFactory({ sizePerPage: 5 })}
-        rowEvents={rowEvents}
-      />
-      {show ? <ModalContent /> : null}
+      {employees && selected && nonSelected && (
+        <BootstrapTable
+          bootstrap4
+          keyField="id"
+          data={employees}
+          columns={columns}
+          pagination={paginationFactory({ sizePerPage: 5 })}
+          rowEvents={rowEvents}
+          selectRow={{
+            selectColumnPosition: "right",
+            selected: selected,
+            nonSelectable: nonSelected,
+            mode: "checkbox",
+            onSelect: handleSelect,
+          }}
+        />
+      )}
+      {employees && show && selected ? <ModalContent /> : null}
     </div>
   );
 }

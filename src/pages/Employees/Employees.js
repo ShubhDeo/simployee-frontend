@@ -6,6 +6,7 @@ import DateTime from "../../Components/DateTime";
 import { Barchart } from "../../Components/Barchart";
 import AddEmployee from "../../Components/AddEmployee";
 import EmployeeNav from "../../Components/EmployeeNav";
+import EditEmployeeDetails from "../../Components/EditEmployeeDetails";
 
 function Employees() {
   const data = [
@@ -48,7 +49,6 @@ function Employees() {
   ];
   const { id } = useParams();
   const [info, setInfo] = useState();
-  const value = "employee-dashboard";
   return (
     <div style={{ height: "100vh" }} className="employees" id="employee-bg">
       <EmployeeNav />
@@ -60,7 +60,10 @@ function Employees() {
         }}
       >
         <div>
-          <DateTime value={value} />
+          <DateTime />
+        </div>
+        <div>
+          <EditEmployeeDetails />
         </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space" }}>

@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
-#bg{
-    background-image: url( '/public/Office.jpg' );
+#bg {
+    background-image: url('/public/Office.jpg');
     background-repeat: no-repeat;
     background-size: cover;
    position: absolute;
@@ -12,28 +12,52 @@
    font-family: 'Poppins', sans-serif;
    backdrop-filter: blur(2px);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#card{
+#card {
 
-    position: relative;
-    width:25%;
+    /* position: relative; */
+    width: 25%;
     height: 55%;
-    margin: 10% auto;
+    /* margin: 10% auto; */
     border-radius: 5px;
     background-color: #d2deec;
-    background: rgba(210,222,234, 0.9);
-    border-color:#d2deec ;
-    
+    background: rgba(210, 222, 234, 0.9);
+    border-color: #d2deec;
+    display: flex;
+    justify-content: center;
 }
 
-#content{
+#content {
     justify-content: center;
-    margin:10% auto;
+    margin: 10% auto;
     width: 80%;
 }
-#btn{
-   /* margin:10%  auto 0 auto ; */
-   width: 100%;
+
+#btn {
+    /* margin:10%  auto 0 auto ; */
+    width: 100%;
 }
 
+@media only screen and (max-device-width: 600px){
+    #card{
+        width: 80%;
+    }
+}
+
+@media only screen and (min-device-width: 600px) and (max-device-width: 1024px){
+    #card{
+        height:95% ;
+        width: 50%;
+    }
+}
+
+/* @media only screen and (min-device-width: 768px){
+    #card{
+        height:65% ;
+        width: 60%;
+    }
+} */
