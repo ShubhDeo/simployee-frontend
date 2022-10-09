@@ -10,33 +10,39 @@ import { InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import ToggleButton from "@mui/material/ToggleButton";
+import axios from "axios";
 
 const PopupForm = ({ value }) => {
   const [show, setShow] = useState(false);
   //   const valueRef = useRef("add-employees");
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => setShow(true);
 
   const [selected, setSelected] = useState(false);
+  const form = useRef();
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
         {value === "employee-dashboard" ? "Edit Details" : "Add Employees"}
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {value === "employee-dashboard" ? "Edit Details" : "Add Employees"}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+      <Form>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>
+              {value === "employee-dashboard"
+                ? "Edit Details"
+                : "Add Employees"}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             {value === "employee-dashboard" ? (
               <Form.Group className="mb-3">
                 <ToggleButton
@@ -183,17 +189,19 @@ const PopupForm = ({ value }) => {
             ) : (
               <></>
             )}
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            {value === "employee-dashboard" ? "Update Changes" : "Add Employee"}
-          </Button>
-        </Modal.Footer>
-      </Modal>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button type="submit" variant="primary">
+              {value === "employee-dashboard"
+                ? "Update Changes"
+                : "Add Employee"}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </Form>
     </>
   );
 };

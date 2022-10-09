@@ -1,21 +1,36 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Alert, Row, Col, Form } from "react-bootstrap";
 import LoginLogo from "../../Components/LoginLogo";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(password.length < 6) {
-        alert("Password must be atleast 6 characters long.")
-        return;
+    if (password.length < 6) {
+      alert("Password must be atleast 6 characters long.");
+      return;
     }
-
-  }
+    let response = await axios.post(
+      `${process.env.REACT_APP_BACKEND_BASE}/api/login`,
+      {
+        email: email,
+        password: password,
+      }
+    );
+    let data = response.data;
+    console.log(data);
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("id",data._id);
+    console.log(typeof data.isAdmin);
+    if (data.isAdmin) navigate("/admindash");
+    else navigate(`/employees/${data._id}`);
+  };
 
   return (
     <div className="login">
@@ -27,13 +42,15 @@ const Login = () => {
             <Form onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label>Email</Form.Label>
-                <Form.Control 
-                  type="email" 
-                  placeholder="Enter your email" 
+                <Form.Control
+                  type="email"
+                  placeholder="Enter your email"
                   value={email}
-                  onChange={(e) => {setEmail(e.target.value)}}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   required
-                  />
+                />
               </Form.Group>
               <br />
               <Form.Group>
@@ -42,7 +59,9 @@ const Login = () => {
                   type="password"
                   placeholder="Enter your password"
                   value={password}
-                  onChange={(e) => {setPassword(e.target.value)}}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   required
                 />
               </Form.Group>
@@ -58,6 +77,6 @@ const Login = () => {
       </Row>
     </div>
   );
-}
+};
 
 export default Login;
