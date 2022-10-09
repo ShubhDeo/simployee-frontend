@@ -10,7 +10,7 @@ import { InputAdornment, IconButton } from "@material-ui/core";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import ToggleButton from "@mui/material/ToggleButton";
-import axios from "axios"
+import axios from "axios";
 
 const PopupForm = ({ value }) => {
   const [show, setShow] = useState(false);
@@ -22,51 +22,10 @@ const PopupForm = ({ value }) => {
   const handleShow = () => setShow(true);
 
   const [selected, setSelected] = useState(false);
-  const [password, setPassword] = useState()
-  const [name,setName] = useState();
-  const [email,setEmail] = useState();
-  const [contact,setContact] = useState();
-  const [dept,setDept] = useState();
-  const [joinDate,setJoinDate] = useState();
-
-  const handleEmployeeDetails = (e) => {
-    if(e.target.id=="employeeName") setEmployeeDetails({name:e.target.value})
-  }
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-
-
-  const handleSubmit = async () => {
-      if(!name || !email || !dept || !joinDate || password.length < 6 || contact.length!==10) {
-        alert("Invalid credentials")
-        return;
-      }
-
-      let response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_BASE}/api/user/add`,
-        {
-          username: name,
-          email,
-          password,
-          contact,
-          joiningDate: joinDate,
-          department: dept,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      let data = response.data;
-      console.log(data);
-
-      //setShow(false);
-  }
-
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -75,21 +34,40 @@ const PopupForm = ({ value }) => {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Employees</Modal.Title>
+          <Modal.Title>
+            {value === "employee-dashboard" ? "Edit Details" : "Add Employees"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3">
-              <Form.Label>Name</Form.Label>
-              <br />
-              <TextField
-                id="employeeName"
-                // label="Multiline"
-                value={name}
-                onChange={(e) => {setName(e.target.value)}}
-                fullWidth={true}
-              />
-            </Form.Group>
+            {value === "employee-dashboard" ? (
+              <Form.Group className="mb-3">
+                <ToggleButton
+                  value="check"
+                  selected={selected}
+                  onChange={() => {
+                    setSelected(!selected);
+                  }}
+                  color="primary"
+                >
+                  Change Password
+                </ToggleButton>
+              </Form.Group>
+            ) : (
+              <></>
+            )}
+            {selected == false ? (
+              <>
+                <Form.Group className="mb-3">
+                  <Form.Label>Name</Form.Label>
+                  <br />
+                  <TextField
+                    id="outlined-multiline-static"
+                    // label="Multiline"
+
+                    fullWidth={true}
+                  />
+                </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
@@ -159,20 +137,24 @@ const PopupForm = ({ value }) => {
               </Select>
             </Form.Group>
 
-            {/* DateTime */}
-            <Form.Group className="mb-3">
-              <Form.Label>Joining Date</Form.Label>
-              <br />
-              <DateTime joinDate={joinDate} setJoinDate={setJoinDate} />
-            </Form.Group>
+                {/* DateTime */}
+                <Form.Group className="mb-3">
+                  <Form.Label>Joining Date</Form.Label>
+                  <br />
+                  <DateTime value="add-employee-admin" val={value} />
+                </Form.Group>
+              </>
+            ) : (
+              <></>
+            )}
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button  variant="primary" onClick={handleSubmit}>
-            Add Employee
+          <Button variant="primary" onClick={handleClose}>
+            {value === "employee-dashboard" ? "Update Changes" : "Add Employee"}
           </Button>
         </Modal.Footer>
       </Modal>
