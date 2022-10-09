@@ -26,7 +26,6 @@ const columns = [
   {
     dataField: "name",
     text: "Email Id",
-    sort: true,
   },
   {
     dataField: "price",
@@ -43,7 +42,6 @@ const columns = [
 ];
 
 export default function App() {
-
   const data = [
     {
       id: "break",
@@ -83,12 +81,7 @@ export default function App() {
     },
   ];
 
-
-
-
-
   const [modalInfo, setModalInfo] = useState([]);
-  
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -103,30 +96,25 @@ export default function App() {
 
   const ModalContent = () => {
     return (
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}  size = "lg">
         <Modal.Header closeButton>
           <Modal.Title>{modalInfo.id}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-             {/* Pie Chart */}
-        <div style={{ display: "flex" }}>
-          <div style={{ height: "40vh", width: "50%" }}>
-            <Piechart data={data} />
+        <Modal.Body >
+          {/* Pie Chart */}
+          <div style={{ display: "flex"}}>
+            <div style={{ height: "40vh", width: "50%" }}>
+              <Piechart data={data} />
+            </div>
+            <div style={{ height: "40vh", width: "50%" }}>
+              <Piechart data={data} />
+            </div>
           </div>
-          <div style={{ height: "40vh", width: "50%" }}>
-            <Piechart data={data} />
+
+          {/* Bar Chart */}
+          <div style={{ height: "40vh", width: "100%" }}>
+            <Barchart data={data2} />
           </div>
-        </div>
-
-        {/* Bar Chart */}
-        <div style={{ height: "40vh", width: "50%" }}>
-          <Barchart data={data2} />
-        </div>
-
-
-
-
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -148,13 +136,6 @@ export default function App() {
         rowEvents={rowEvents}
       />
       {show ? <ModalContent /> : null}
-
-
-
-
-
-
-
     </div>
   );
 }
