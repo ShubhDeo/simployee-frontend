@@ -3,9 +3,8 @@ import { useParams } from "react-router-dom";
 import PopupForm from "../../Components/PopupForm";
 import Piechart from "../../Components/Piechart";
 import DateTime from "../../Components/DateTime";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
 import { Barchart } from "../../Components/Barchart";
+import AddEmployee from "../../Components/AddEmployee";
 
 function Employees() {
   const data = [
@@ -48,15 +47,21 @@ function Employees() {
   ];
   const { id } = useParams();
   const [info, setInfo] = useState();
+  const value = "employee-dashboard";
   return (
     <div className="employees">
       <h1>Employee DashBoard</h1>
-      <div style={{ display: "flex", width: "20%" }}>
+      <div style={{ display: "flex",justifyContent:'center',alignItems:'center'}}>
         {/* Pop-up form */}
-        <PopupForm />
-        <MuiPickersUtilsProvider utils={MomentUtils}>
-          <DateTime />
-        </MuiPickersUtilsProvider>
+        <div>
+          <PopupForm />
+        </div>
+        <div>
+          <DateTime value={value} />
+        </div>
+        <div>
+          <AddEmployee value={value} />
+        </div>
       </div>
 
       {/* Pie Chart */}
