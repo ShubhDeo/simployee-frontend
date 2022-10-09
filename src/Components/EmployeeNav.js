@@ -10,7 +10,8 @@ import EditEmployeeDetails from "./EditEmployeeDetails";
 function EmployeeNav() {
   const navigate=useNavigate();
   const handleClick=()=>{
-    localStorage.clear()
+    localStorage.clear();
+    
     navigate("/");
   }
   return (
