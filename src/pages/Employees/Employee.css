@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 #nav {
-  background-color: #333333;
+  background-color: #074a98;
   font-family: 'Poppins', sans-serif;
   height: 80px;
   display: flex;
@@ -19,6 +19,6 @@
   justify-content: flex-end;
 }
 #employee-bg {
-    background-color: rgb(192, 192, 192) ;
+    background-color: #d2deec ;
     
 }

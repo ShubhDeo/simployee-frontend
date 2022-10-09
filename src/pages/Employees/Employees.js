@@ -63,7 +63,7 @@ function Employees() {
           <DateTime />
         </div>
       </div>
-      <div style={{ display: "flex", justifyContent: "space" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         {/* Pie Chart */}
         {/* <div style={{ display: "flex" }}> */}
         <div style={{ height: "40vh", width: "30%" }}>
@@ -73,9 +73,17 @@ function Employees() {
           <Piechart data={data} />
         </div>
         {/* </div> */}
-
-        {/* Bar Chart */}
-        <div style={{ height: "40vh", width: "40%" }}>
+      </div>
+      {/* Bar Chart */}
+      <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            height: "35vh",
+            width: "40%",
+          }}
+        >
           <Barchart data={data2} />
         </div>
       </div>
