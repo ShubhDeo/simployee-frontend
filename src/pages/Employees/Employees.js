@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import PopupForm from "../../Components/PopupForm";
 import Piechart from "../../Components/Piechart";
 import DateTime from "../../Components/DateTime";
@@ -49,6 +49,14 @@ function Employees() {
   ];
   const { id } = useParams();
   const [info, setInfo] = useState();
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    if(localStorage.getItem("token")===null) {
+        navigate("/")
+    }
+  }, [])
+
   return (
     <div style={{ height: "100vh" }} className="employees" id="employee-bg">
       <EmployeeNav />

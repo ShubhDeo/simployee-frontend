@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Alert, Row, Col } from "react-bootstrap";
 import Pagination from "../../Components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
@@ -9,6 +10,10 @@ import { useEffect } from "react";
 
 function AdminDash() {
   useEffect(() => {
+    if(localStorage.getItem("token")===null) {
+      navigate("/")
+    }
+
     const fetchEmployees = async () => {
       let response = await axios.get(
         `${process.env.REACT_APP_BACKEND_BASE}/api/user`,
@@ -32,6 +37,8 @@ function AdminDash() {
   const [employees, setEmployees] = useState(null);
   const [selected, setSelected] = useState(null);
   const [nonSelected, setNonSelected] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (employees) {
