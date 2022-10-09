@@ -13,7 +13,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import axios from "axios";
 import DateTimeAdmin from "./DateTimeAdmin";
 
-const AddEmployee = ({ employees,setEmployees }) => {
+const AddEmployee = ({ employees, setEmployees }) => {
   const [show, setShow] = useState(false);
   //   const valueRef = useRef("add-employees");
 
@@ -79,7 +79,7 @@ const AddEmployee = ({ employees,setEmployees }) => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" className="text-black" onClick={handleShow}>
         Add Employees
       </Button>
       <Form>

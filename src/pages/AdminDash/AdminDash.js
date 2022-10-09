@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Alert, Row, Col } from "react-bootstrap";
 import Pagination from "../../Components/Pagination";
-import AdminLogo from "../../Components/AdminLogo";
+
 import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
 import { useEffect } from "react";

@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 
 #bg {
     background-image: url('/public/Office.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Bree Serif', serif;
-    backdrop-filter: blur(2px);
+   position: absolute;
+   height: 100vh;
+   width: 100vw; 
+   font-family: 'Poppins', sans-serif;
+   backdrop-filter: blur(2px);
+
     display: flex;
     justify-content: center;
     align-items: center;

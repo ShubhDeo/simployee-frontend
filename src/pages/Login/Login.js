@@ -14,30 +14,31 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      try {
-        if (password.length < 6) {
-          alert("Password must be atleast 6 characters long.");
-          return;
-        }
-        console.log(process.env.REACT_APP_BACKEND_BASE)
-        let response = await axios.post(
-          `${process.env.REACT_APP_BACKEND_BASE}/api/login`,
-          {
-            email: email,
-            password: password,
-          }
-        );
-        let data = response.data;
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("id", data._id);
-        console.log(typeof data.isAdmin);
-        if (data.isAdmin) navigate("/admindash");
-        else navigate(`/employees/${data._id}`);
-      } catch (error) {
-        alert(error)
-        console.log(error)
+    try {
+      if (password.length < 6) {
+        alert("Password must be atleast 6 characters long.");
+        return;
       }
+      console.log(process.env.REACT_APP_BACKEND_BASE);
+      let response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE}/api/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
+      let data = response.data;
+      console.log(data);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("id", data._id);
+      localStorage.setItem("username", data.username);
+      console.log(typeof data.isAdmin);
+      if (data.isAdmin) navigate("/admindash");
+      else navigate(`/employees/${data._id}`);
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
   };
 
   return (
