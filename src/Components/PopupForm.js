@@ -16,7 +16,7 @@ const PopupForm = () => {
     <>
       <Button
         variant="transparent"
-        className="text-black "
+        className="text-black"
         style={{ marginRight: "10px", border: "none" }}
         onClick={handleShow}
       >

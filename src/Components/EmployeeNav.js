@@ -1,11 +1,18 @@
+import {useNavigate} from "react-router-dom"
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import PopupForm from "./PopupForm";
-import AddEmployee from "./AddEmployee";
+import Button from "react-bootstrap/Button";
 import "../pages/Employees/Employee.css";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import EditEmployeeDetails from "./EditEmployeeDetails";
 
 function EmployeeNav() {
+  const navigate=useNavigate();
+  const handleClick=()=>{
+    localStorage.clear()
+    navigate("/");
+  }
   return (
     <Navbar expand="lg" className="mb-5" id="nav">
       <Container>
@@ -22,7 +29,12 @@ function EmployeeNav() {
               <PopupForm />
             </NavDropdown.Item>
             <NavDropdown.Item>
-              <AddEmployee value={"employee-dashboard"} />
+              <EditEmployeeDetails />
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Button onClick={handleClick} variant="transparent" className="text-black">
+                Logout
+              </Button>
             </NavDropdown.Item>
           </NavDropdown>
         </div>

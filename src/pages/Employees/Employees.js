@@ -62,9 +62,6 @@ function Employees() {
         <div>
           <DateTime />
         </div>
-        <div>
-          <EditEmployeeDetails />
-        </div>
       </div>
       <div style={{ display: "flex", justifyContent: "space" }}>
         {/* Pie Chart */}
