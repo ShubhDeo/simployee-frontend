@@ -6,7 +6,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
 import Piechart from "./Piechart";
 import { Barchart } from "./Barchart";
-import DateTime from "./DateTime";
+import DateTimeAdmin from "./DateTimeAdmin"
 import axios from "axios";
 
 const columns = [
@@ -139,7 +139,7 @@ export default function App({ employees, setEmployees,selected,setSelected,nonSe
           Select Date
           <br />
           <br />
-          <DateTime val="pagination" value="pagination" />
+          <DateTimeAdmin />
           {/* Pie Chart */}
           <div style={{ display: "flex" }}>
             <div style={{ height: "40vh", width: "50%" }}>
