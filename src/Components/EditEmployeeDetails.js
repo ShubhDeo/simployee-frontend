@@ -128,11 +128,18 @@ const EditEmployeeDetails = ({ employeeDetails, setEmployeeDetails,employeeName,
                 <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setPassword(password + " ");
+                      }
+                    }}
                     // id="outlined-password-input"
                     type={showPassword ? "text" : "password"}
                     // autoComplete="current-password"
                     value={password}
-                    onChange={(e)=>{setPassword(e.target.value)}}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                     fullWidth={true}
                     InputProps={{
                       // <-- This is where the toggle button is added.
@@ -153,11 +160,18 @@ const EditEmployeeDetails = ({ employeeDetails, setEmployeeDetails,employeeName,
                 <Form.Group className="mb-3">
                   <Form.Label>Confirm Password</Form.Label>
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setConfirmPassword(confirmPassword + " ");
+                      }
+                    }}
                     // id="outlined-password-input"
                     type={showPassword ? "text" : "password"}
                     // autoComplete="current-password"
                     value={confirmPassword}
-                    onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                    }}
                     fullWidth={true}
                     InputProps={{
                       // <-- This is where the toggle button is added.
@@ -186,6 +200,11 @@ const EditEmployeeDetails = ({ employeeDetails, setEmployeeDetails,employeeName,
                   <Form.Label>Name</Form.Label>
                   <br />
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setName(name + " ");
+                      }
+                    }}
                     // id="outlined-multiline-static"
                     // label="Multiline"
                     value={name}

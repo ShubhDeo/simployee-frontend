@@ -59,6 +59,11 @@ const PopupForm = ({ value }) => {
                   <Form.Label>Name</Form.Label>
                   <br />
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setTaskDescription(taskDescription + " ");
+                      }
+                    }}
                     id="outlined-multiline-static"
                     // label="Multiline"
 
@@ -70,6 +75,11 @@ const PopupForm = ({ value }) => {
                   <Form.Label>Email</Form.Label>
                   <br />
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setTaskDescription(taskDescription + " ");
+                      }
+                    }}
                     id="outlined-multiline-static"
                     label={
                       value === "employee-dashboard" ? "Current Email" : ""
@@ -107,6 +117,11 @@ const PopupForm = ({ value }) => {
                 <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
                   <TextField
+                    onKeyUp={(e) => {
+                      if (e.keyCode === 32) {
+                        setTaskDescription(taskDescription + " ");
+                      }
+                    }}
                     id="outlined-password-input"
                     type={showPassword ? "text" : "password"}
                     autoComplete="current-password"
@@ -136,6 +151,11 @@ const PopupForm = ({ value }) => {
               <Form.Group className="mb-3">
                 <Form.Label>Confirm Password</Form.Label>
                 <TextField
+                  onKeyUp={(e) => {
+                    if (e.keyCode === 32) {
+                      setTaskDescription(taskDescription + " ");
+                    }
+                  }}
                   id="outlined-password-input"
                   type={showPassword ? "text" : "password"}
                   autoComplete="current-password"

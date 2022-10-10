@@ -98,6 +98,11 @@ const AddTask = ({
               <Form.Label>Task Description</Form.Label>
               <br />
               <TextField
+                onKeyUp={(e) => {
+                  if (e.keyCode === 32) {
+                    setTaskDescription(taskDescription + " ");
+                  }
+                }}
                 value={taskDescription}
                 onChange={(e) => {
                   e.preventDefault();

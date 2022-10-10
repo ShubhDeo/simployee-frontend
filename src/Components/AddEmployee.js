@@ -29,45 +29,48 @@ const AddEmployee = ({ employees, setEmployees }) => {
   const [dept, setDept] = useState();
   const [joinDate, setJoinDate] = useState();
 
-
   const handleAddEmployee = async (e) => {
     e.preventDefault();
-    try{let response = await axios.post(
-      `${process.env.REACT_APP_BACKEND_BASE}/api/user/add`,
-      {
-        username: name,
-        email: email,
-        contact: contact,
-        password: password,
-        department: dept,
-        joiningDate: joinDate,
-        isAdmin: false
-      },{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    try {
+      let response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_BASE}/api/user/add`,
+        {
+          username: name,
+          email: email,
+          contact: contact,
+          password: password,
+          department: dept,
+          joiningDate: joinDate,
+          isAdmin: false,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         }
-      }
-    );
-    let data = response.data;
-    console.log(data);
-    let tempData = await axios.get(`${process.env.REACT_APP_BACKEND_BASE}/api/user`,{
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-    tempData = tempData.data
-    tempData.map((element,idx) => {
-      element.id = idx
-    });
-    setEmployees(tempData);
-    //console.log(employees)
-    handleClose();
-    alert("Employee added successfully")
-    console.log("Employee added successfully")
-  }
-    catch(e){
+      );
+      let data = response.data;
+      console.log(data);
+      let tempData = await axios.get(
+        `${process.env.REACT_APP_BACKEND_BASE}/api/user`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      tempData = tempData.data;
+      tempData.map((element, idx) => {
+        element.id = idx;
+      });
+      setEmployees(tempData);
+      //console.log(employees)
+      handleClose();
+      alert("Employee added successfully");
+      console.log("Employee added successfully");
+    } catch (e) {
       alert(e);
-      handleClose()
+      handleClose();
     }
   };
 
@@ -79,7 +82,12 @@ const AddEmployee = ({ employees, setEmployees }) => {
 
   return (
     <>
-      <Button style={{border:"none"}} variant="transpaernt" className="text-black" onClick={handleShow}>
+      <Button
+        style={{ border: "none" }}
+        variant="transpaernt"
+        className="text-black"
+        onClick={handleShow}
+      >
         Add Employees
       </Button>
       <Form>
@@ -92,6 +100,11 @@ const AddEmployee = ({ employees, setEmployees }) => {
               <Form.Label>Name</Form.Label>
               <br />
               <TextField
+                onKeyUp={(e) => {
+                  if (e.keyCode === 32) {
+                    setName(name + " ");
+                  }
+                }}
                 // label="Multiline"
                 value={name}
                 onChange={(e) => {
@@ -105,6 +118,11 @@ const AddEmployee = ({ employees, setEmployees }) => {
               <Form.Label>Email</Form.Label>
               <br />
               <TextField
+                onKeyUp={(e) => {
+                  if (e.keyCode === 32) {
+                    setEmail(email + " ");
+                  }
+                }}
                 id="employeeEmail"
                 // InputProps={{disableUnderline: true}}
                 // sx={{
@@ -138,6 +156,11 @@ const AddEmployee = ({ employees, setEmployees }) => {
             <Form.Group className="mb-3">
               <Form.Label>Password</Form.Label>
               <TextField
+                onKeyUp={(e) => {
+                  if (e.keyCode === 32) {
+                    setPassword(password + " ");
+                  }
+                }}
                 id="employeePassword"
                 type={showPassword ? "text" : "password"}
                 autoComplete="current-password"
