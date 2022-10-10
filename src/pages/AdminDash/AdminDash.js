@@ -6,13 +6,13 @@ import AdminNav from "../../Components/AdminNav";
 import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
 import { useEffect } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function AdminDash() {
   const navigate = useNavigate();
   useEffect(() => {
-    if(localStorage.getItem("token")===null) {
-      navigate("/")
+    if (localStorage.getItem("token") === null) {
+      navigate("/");
     }
 
     const fetchEmployees = async () => {
@@ -38,8 +38,6 @@ function AdminDash() {
   const [employees, setEmployees] = useState(null);
   const [selected, setSelected] = useState(null);
   const [nonSelected, setNonSelected] = useState(null);
-  
-
 
   useEffect(() => {
     if (employees) {
