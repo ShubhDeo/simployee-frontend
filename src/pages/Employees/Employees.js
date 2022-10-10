@@ -10,8 +10,8 @@ import EditEmployeeDetails from "../../Components/EditEmployeeDetails";
 import axios from "axios";
 // import { TempleBuddhistOutlined } from "@mui/icons-material";
 import { parseNonNullablePickerDate } from "@mui/x-date-pickers/internals";
-import {Row, Col} from 'react-bootstrap'
-import './Employee.css'
+import { Row, Col } from "react-bootstrap";
+import "./Employee.css";
 
 function Employees() {
   const colors = [
@@ -21,11 +21,62 @@ function Employees() {
   ];
   const numberMapName = ["break", "meeting", "work"];
   const { id } = useParams();
-  const [employeeInfoToday, setEmployeeInfoToday] = useState(null);
-  const [employeeInfoPrevious, setEmployeeInfoPrevious] = useState(null);
+  const [employeeInfoToday, setEmployeeInfoToday] = useState([
+    {
+      id: 0,
+      label: "break",
+      value: null,
+      // color: colors[id - 1],
+    },
+    {
+      id: 1,
+      label: "meeting",
+      value: null,
+      // color: colors[id - 1],
+    },
+    {
+      id: 2,
+      label: "work",
+      value: null,
+      // color: colors[id - 1],
+    },
+  ]);
+  const [employeeInfoPrevious, setEmployeeInfoPrevious] = useState([
+    {
+      id: 0,
+      label: "break",
+      value: null,
+      // color: colors[id - 1],
+    },
+    {
+      id: 1,
+      label: "meeting",
+      value: null,
+      // color: colors[id - 1],
+    },
+    {
+      id: 2,
+      label: "work",
+      value: null,
+      // color: colors[id - 1],
+    },
+  ]);
   const [employeeDetails, setEmployeeDetails] = useState(null);
   const [employeeName, setEmployeeName] = useState(null);
-  const [employeeInfoWeek, setEmployeeInfoWeek] = useState(null);
+  const [employeeInfoWeek, setEmployeeInfoWeek] = useState([
+    {
+      "Task Type": "Not Working",
+      "Total Minutes": 0,
+    },
+    {
+      "Task Type": "Meetings",
+      "Total Minutes": 0,
+    },
+    {
+      "Task Type": "Work",
+      "Total Minutes": 0,
+    },
+  ]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -172,7 +223,11 @@ function Employees() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", overflowX: "clip" }} className="employees" id="employee-bg">
+    <div
+      style={{ minHeight: "100vh", overflowX: "clip" }}
+      className="employees"
+      id="employee-bg"
+    >
       <EmployeeNav
         id={id}
         employeeName={employeeName}
@@ -202,58 +257,70 @@ function Employees() {
         {/* Pie Chart */}
         {/* <div style={{ display: "flex" }}> */}
         <Row>
-        {employeeInfoToday && (
-          <Col xs={12} lg={6} className="mb-5">
-            <div style={{ height: "40vh", width: "100%", textAlign: "center" }}>
-            <h4>Your Statistics for Today</h4>
-            <Piechart data={employeeInfoToday} />
-          </div>
-          </Col>
-        )}
+          {employeeInfoToday && (
+            <Col xs={12} lg={6} className="mb-5">
+              <div
+                style={{ height: "40vh", width: "100%", textAlign: "center" }}
+              >
+                <h4>Your Statistics for Today</h4>
+                <Piechart data={employeeInfoToday} />
+              </div>
+            </Col>
+          )}
 
-        {employeeInfoPrevious && (
-          <Col xs={12} lg={6} className="mb-5">
-            <div style={{ height: "40vh", width: "100%", textAlign: "center" }}>
-            <h4>Your Statistics for Yesterday</h4>
-            <Piechart data={employeeInfoPrevious} />
-          </div>
-          </Col>
-        )}
+          {employeeInfoPrevious && (
+            <Col xs={12} lg={6} className="mb-5">
+              <div
+                style={{ height: "40vh", width: "100%", textAlign: "center" }}
+              >
+                <h4>Your Statistics for Yesterday</h4>
+                <Piechart data={employeeInfoPrevious} />
+              </div>
+            </Col>
+          )}
         </Row>
       </div>
       {/* Bar Chart */}
       <Row>
-      {employeeInfoWeek&&
-        <Col xs={12} sm={12} lg={6} className="mx-auto mt-3 mb-3">
-          <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            height: "45vh",
-            width: "100%",
-            margin: "0px auto 0 auto"
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexDirection: "column",
-              height: "45vh",
-              width: "100%",
-              margin: "0px auto 0 auto",
-            }}
-          >
-            <h4 style={{ textAlign: "center" }}>Weekly Statistics for Tasks</h4>
-            <Barchart data={employeeInfoWeek} />
-          </div>
-        </div>
-      </div>
-        </Col>
-      }
-     </Row>
+        {employeeInfoWeek && (
+          <Col xs={12} sm={12} lg={6} className="mx-auto mt-3 mb-3">
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                  height: "45vh",
+                  width: "100%",
+                  margin: "0px auto 0 auto",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    height: "45vh",
+                    width: "100%",
+                    margin: "0px auto 0 auto",
+                  }}
+                >
+                  <h4 style={{ textAlign: "center" }}>
+                    Weekly Statistics for Tasks
+                  </h4>
+                  <Barchart data={employeeInfoWeek} />
+                </div>
+              </div>
+            </div>
+          </Col>
+        )}
+      </Row>
     </div>
   );
 }

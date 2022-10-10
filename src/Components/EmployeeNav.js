@@ -43,15 +43,17 @@ function EmployeeNav({
             id="collasible-nav-dropdown"
           >
             <NavDropdown.Item>
-              <AddTask
-                id={id}
-                employeeInfoToday={employeeInfoToday}
-                setEmployeeInfoToday={setEmployeeInfoToday}
-                employeeInfoPrevious={employeeInfoPrevious}
-                setEmployeeInfoPrevious={setEmployeeInfoPrevious}
-                employeeInfoWeek={employeeInfoWeek}
-                setEmployeeInfoWeek={setEmployeeInfoWeek}
-              />
+              {employeeInfoToday && employeeInfoPrevious && (
+                <AddTask
+                  id={id}
+                  employeeInfoToday={employeeInfoToday}
+                  setEmployeeInfoToday={setEmployeeInfoToday}
+                  employeeInfoPrevious={employeeInfoPrevious}
+                  setEmployeeInfoPrevious={setEmployeeInfoPrevious}
+                  employeeInfoWeek={employeeInfoWeek}
+                  setEmployeeInfoWeek={setEmployeeInfoWeek}
+                />
+              )}
             </NavDropdown.Item>
             <NavDropdown.Item>
               <EditEmployeeDetails

@@ -43,28 +43,30 @@ const AddTask = ({
         }
       );
       let data = response.data;
-      let date=new Date();
-      startTime.setUTCHours(0,0,0,0);
-      date.setUTCHours(0,0,0,0);
+      let date = new Date();
+      startTime.setUTCHours(0, 0, 0, 0);
+      date.setUTCHours(0, 0, 0, 0);
       // console.log(startTime,date);
       let tempInfoWeek = employeeInfoWeek.slice(0);
       // console.log(tempInfoWeek);
       let timeWeekInfo = parseInt(tempInfoWeek[taskType - 1]["Total Minutes"]);
       // console.log(timeWeekInfo);
-      tempInfoWeek[taskType - 1]["Total Minutes"] = timeWeekInfo+parseInt(timeTaken);
+      tempInfoWeek[taskType - 1]["Total Minutes"] =
+        timeWeekInfo + parseInt(timeTaken);
       setEmployeeInfoWeek(tempInfoWeek);
-      if(date.getTime()===startTime.getTime()){
-        let temp=employeeInfoToday.slice(0);
+      if (date.getTime() === startTime.getTime()) {
+        let temp = employeeInfoToday.slice(0);
         // console.log(temp);
         // console.log(temp[taskType-1].value)
-        temp[taskType-1].value++;
+        if (temp[taskType - 1].value) temp[taskType - 1].value++;
+        else temp[taskType - 1].value = 1;
         // console.log(temp);
         setEmployeeInfoToday(temp);
-      }
-      else{
-        let temp=employeeInfoPrevious.slice(0);
+      } else {
+        let temp = employeeInfoPrevious.slice(0);
         // console.log(temp);
-        temp[taskType-1].value++;
+        if (temp[taskType - 1].value) temp[taskType - 1].value++;
+        else temp[taskType - 1].value = 1;
         // console.log(temp);
         setEmployeeInfoPrevious(temp);
       }
@@ -90,7 +92,9 @@ const AddTask = ({
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title style={{fontFamily: "Poppins", fontWeight: "bolder"}}>Add Tasks</Modal.Title>
+          <Modal.Title style={{ fontFamily: "Poppins", fontWeight: "bolder" }}>
+            Add Tasks
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
