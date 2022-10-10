@@ -5,12 +5,20 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import Card from "react-bootstrap/Card";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(()=> {
+     if(localStorage.getItem("token")!==null) {
+      if (localStorage.getItem("isAdmin")===true) navigate("/admindash");
+      else navigate(`/employees/${localStorage.getItem("id")}`);
+     }
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +39,7 @@ const Login = () => {
       console.log(data);
       localStorage.setItem("token", data.token);
       localStorage.setItem("id", data._id);
+      localStorage.setItem("isAdmin", data.isAdmin)
       localStorage.setItem("username", data.username);
       console.log(typeof data.isAdmin);
       if (data.isAdmin) navigate("/admindash");

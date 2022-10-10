@@ -6,26 +6,43 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import { Modal, Button } from "react-bootstrap";
 import Piechart from "./Piechart";
 import { Barchart } from "./Barchart";
-import DateTimeAdmin from "./DateTimeAdmin"
+import DateTimeAdmin from "./DateTimeAdmin";
 import axios from "axios";
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 
 const columns = [
   {
     dataField: "username",
     text: "Employee Name",
     sort: true,
+    // headerStyle: {
+    //   border: "1px solid black"
+    // }
   },
   {
     dataField: "email",
     text: "Email Id",
+    // headerStyle: {
+    //   border: "1px solid black"
+    // }
   },
   {
     dataField: "contact",
     text: "Contact",
-  },
+    // headerStyle: {
+    //   border: "1px solid black"
+    // }
+  }
 ];
 
-export default function App({ employees, setEmployees,selected,setSelected,nonSelected,setNonSelected }) {
+export default function App({
+  employees,
+  setEmployees,
+  selected,
+  setSelected,
+  nonSelected,
+  setNonSelected,
+}) {
   const data = [
     {
       id: "break",
@@ -163,10 +180,15 @@ export default function App({ employees, setEmployees,selected,setSelected,nonSe
     );
   };
 
+  const rowStyle = {
+    border: "1px solid black"
+  }
+
   return (
     <div style={{ marginRight: "2%", marginLeft: "2%" }}>
       {employees && selected && nonSelected && (
         <BootstrapTable
+          bordered
           bootstrap4
           keyField="id"
           data={employees}
@@ -179,7 +201,9 @@ export default function App({ employees, setEmployees,selected,setSelected,nonSe
             nonSelectable: nonSelected,
             mode: "checkbox",
             onSelect: handleSelect,
+            //style: {border: "1px solid black"}
           }}
+          // rowStyle={rowStyle}
         />
       )}
       {employees && show && selected ? <ModalContent /> : null}

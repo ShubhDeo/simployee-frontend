@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Alert, Row, Col } from "react-bootstrap";
 import Pagination from "../../Components/Pagination";
-import { useNavigate } from "react-router-dom";
-
+import AdminNav from "../../Components/AdminNav";
 import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
 import { useEffect } from "react";
+import {useNavigate} from 'react-router-dom'
 
 function AdminDash() {
+  const navigate = useNavigate();
   useEffect(() => {
     if(localStorage.getItem("token")===null) {
       navigate("/")
@@ -37,7 +38,7 @@ function AdminDash() {
   const [employees, setEmployees] = useState(null);
   const [selected, setSelected] = useState(null);
   const [nonSelected, setNonSelected] = useState(null);
-  const navigate = useNavigate();
+  
 
 
   useEffect(() => {
@@ -58,14 +59,12 @@ function AdminDash() {
     }
   }, [employees]);
   return (
-    <div className="App">
+    <div className="App" id="admin-bg">
       <>
-        <h1>Admin Dashboard</h1>
-        <br />
+        <AdminNav employees={employees} setEmployees={setEmployees} />
         <div className="text-center">
           <div className="Left">
             <h4> Employees</h4>
-            <AddEmployee employees={employees} setEmployees={setEmployees} />
             <br />
             <Pagination
               employees={employees}
