@@ -31,7 +31,7 @@ function EmployeeNav({
   };
 
   return (
-    <Navbar expand="lg" className="mb-2" id="nav">
+    <Navbar expand="lg" className="mb-5" id="nav">
       <Container>
         <Navbar.Brand href="#home" id="nav-text">
           Employee Dashboard
