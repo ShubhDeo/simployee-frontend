@@ -45,8 +45,9 @@ const Login = () => {
       if (data.isAdmin) navigate("/admindash");
       else navigate(`/employees/${data._id}`);
     } catch (error) {
-      alert(error);
       console.log(error);
+      alert(error.response.data.error);
+      
     }
   };
 
