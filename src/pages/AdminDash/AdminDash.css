@@ -8,6 +8,17 @@
   justify-content: space-evenly;
 }
 
+h2 {
+  font-family: 'Poppins';
+  font-weight: bolder;
+}
+
+h4 {
+  font-family: 'Poppins';
+  font-weight: bolder;
+}
+
+
 #a-nav-text {
   font-size: 2.5rem;
   color: #fff;
@@ -22,4 +33,16 @@
 #admin-bg {
 height: 100vh;
 /* background-color: #d2deec; */
+}
+
+@media (max-width: 1000px) {
+  #a-nav {
+    height: 130px;
+  }
+}
+
+@media (max-width: 600px) {
+  #a-nav-text {
+    font-size: 1.5rem;
+  }
 }

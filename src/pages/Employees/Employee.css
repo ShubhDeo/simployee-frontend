@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 #nav {
   background-color: #074a98;
   font-family: 'Poppins', sans-serif;
@@ -7,6 +8,16 @@
   display: flex;
   justify-content: space-evenly;
 }
+
+h2 {
+  font-family: 'Poppins';
+}
+
+h4 {
+  font-family: 'Poppins';
+  font-weight: bolder;
+}
+
 
 #nav-text {
   font-size: 2.5rem;

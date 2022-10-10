@@ -93,7 +93,7 @@ const AddEmployee = ({ employees, setEmployees }) => {
       <Form>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Employees</Modal.Title>
+            <Modal.Title style={{fontFamily: "Poppins", fontWeight: "bolder"}}>Add Employees</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3">

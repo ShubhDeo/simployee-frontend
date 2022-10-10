@@ -106,7 +106,7 @@ const EditEmployeeDetails = ({ employeeDetails, setEmployeeDetails,employeeName,
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Details</Modal.Title>
+          <Modal.Title style={{fontFamily: "Poppins", fontWeight: "bolder"}}>Edit Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
