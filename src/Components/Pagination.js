@@ -8,7 +8,7 @@ import Piechart from "./Piechart";
 import { Barchart } from "./Barchart";
 import DateTimeAdmin from "./DateTimeAdmin";
 import axios from "axios";
-import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
+import cellEditFactory, { Type } from "react-bootstrap-table2-editor";
 
 const columns = [
   {
@@ -32,7 +32,7 @@ const columns = [
     // headerStyle: {
     //   border: "1px solid black"
     // }
-  }
+  },
 ];
 
 export default function App({
@@ -89,8 +89,7 @@ export default function App({
   const handleClose = () => setShow(false);
 
   const rowEvents = {
-    onClick: (e, row) => {
-      console.log(row);
+    onClick: (e, row, rowIndex) => {
       setModalInfo(row);
       setShow(true);
     },
@@ -146,32 +145,168 @@ export default function App({
     }
   }, [employees]);
 
-  const ModalContent = () => {
+  const ModalContent = ({ id, name }) => {
+    const numberMapName = ["break", "meeting", "work"];
+    const [employeeInfoToday, setEmployeeInfoToday] = useState(null);
+    const [employeeInfoPrevious, setEmployeeInfoPrevious] = useState(null);
+    const [employeeInfoWeek, setEmployeeInfoWeek] = useState(null);
+    useEffect(() => {
+      const fetchEmployeeToday = async () => {
+        let dateString = "";
+        let currentDate = new Date();
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let date = currentDate.getDate();
+        dateString = `${year}-${month}-${date}`;
+        let response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE}/api/task/fetch/${id}/${dateString}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        let data = response.data;
+        let taskCategory = new Map();
+        data.map((task) => {
+          if (taskCategory.get(task.taskType)) {
+            let temp = taskCategory.get(task.taskType);
+            temp = temp + 1;
+            taskCategory.set(task.taskType, temp);
+          } else taskCategory.set(task.taskType, 1);
+        });
+        let finalTaskArray = [];
+        for (let [key, value] of taskCategory) {
+          finalTaskArray.push({
+            id: numberMapName[key - 1],
+            label: numberMapName[key - 1],
+            value: value,
+            // color: colors[id - 1],
+          });
+          setEmployeeInfoToday(finalTaskArray);
+        }
+      };
+      const fetchEmployeeWeeklyTask = async () => {
+        let response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE}/api/task/fetch/week/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        let resData = response.data; //[]
+        let weeklyArray = [
+          {
+            "Task Type": "Not Working",
+            "Total Minutes": 0,
+          },
+          {
+            "Task Type": "Working",
+            "Total Minutes": 0,
+          },
+          {
+            "Task Type": "Meetings",
+            "Total Minutes": 0,
+          },
+        ];
+        let weeklyTime = [0, 0, 0];
+        resData.forEach((tasks) => {
+          // console.log(tasks.taskType)
+          let num = parseInt(tasks.taskType - 1);
+          let time = parseInt(tasks.timeTaken);
+          // console.log(time)
+          weeklyTime[num] += time;
+          // console.log(weeklyTime[num])
+        });
+        weeklyArray[0]["Total Minutes"] = weeklyTime[0];
+        weeklyArray[1]["Total Minutes"] = weeklyTime[1];
+        weeklyArray[2]["Total Minutes"] = weeklyTime[2];
+        setEmployeeInfoWeek(weeklyArray);
+      };
+      const fetchEmployeePrevious = async () => {
+        let dateString = "";
+        let currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() - 1);
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let date = currentDate.getDate();
+        if (date <= 9) {
+          date = `0${date}`;
+        }
+        dateString = `${year}-${month}-${date}`;
+        let response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_BASE}/api/task/fetch/${id}/${dateString}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        let data = response.data;
+        let taskCategory = new Map();
+        data.map((task) => {
+          if (taskCategory.get(task.taskType)) {
+            let temp = taskCategory.get(task.taskType);
+            temp = temp + 1;
+            taskCategory.set(task.taskType, temp);
+          } else taskCategory.set(task.taskType, 1);
+        });
+        let finalTaskArray = [];
+        for (let [key, value] of taskCategory) {
+          finalTaskArray.push({
+            id: numberMapName[key - 1],
+            label: numberMapName[key - 1],
+            value: value,
+            // color: colors[id - 1],
+          });
+          setEmployeeInfoPrevious(finalTaskArray);
+        }
+      };
+      fetchEmployeePrevious();
+      fetchEmployeeToday();
+      fetchEmployeeWeeklyTask();
+    }, []);
     return (
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal show={show} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{modalInfo.id}</Modal.Title>
+          <Modal.Title>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Select Date
-          <br />
-          <br />
-          <DateTimeAdmin />
-          {/* Pie Chart */}
           <div style={{ display: "flex" }}>
-            <div style={{ height: "40vh", width: "50%" }}>
-              <Piechart data={data} />
-            </div>
-            <div style={{ height: "40vh", width: "50%" }}>
-              <Piechart data={data} />
-            </div>
+            {employeeInfoToday ? (
+              <div style={{ height: "40vh", width: "50%" }}>
+                <h3>{name}'s Statistics for today</h3>
+                <Piechart data={employeeInfoToday} />
+              </div>
+            ) : (
+              <div style={{ width: "50%" }}>
+                <h2>No Data available for today</h2>
+              </div>
+            )}
+            {employeeInfoPrevious ? (
+              <div style={{ height: "40vh", width: "50%" }}>
+                <h3>{name}'s Statistics for yesterday</h3>
+                <Piechart data={employeeInfoPrevious} />
+              </div>
+            ) : (
+              <div style={{ width: "50%" }}>
+                <h2>No Data available for yesterday</h2>
+              </div>
+            )}
           </div>
           {/* Bar Chart */}
-          <div style={{ height: "40vh", width: "100%" }}>
-            <Barchart data={data2} />
-          </div>
+          {employeeInfoWeek ? (
+            <div style={{ height: "40vh", width: "100%" }}>
+              <Barchart data={employeeInfoWeek} />
+            </div>
+          ) : (
+            <div style={{ marginTop: "25%" }}>
+              <h3>Weekly data is unavailable</h3>
+            </div>
+          )}
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer style={{ marginTop: "100px" }}>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
@@ -181,8 +316,8 @@ export default function App({
   };
 
   const rowStyle = {
-    border: "1px solid black"
-  }
+    border: "1px solid black",
+  };
 
   return (
     <div style={{ marginRight: "2%", marginLeft: "2%" }}>
@@ -206,7 +341,9 @@ export default function App({
           // rowStyle={rowStyle}
         />
       )}
-      {employees && show && selected ? <ModalContent /> : null}
+      {employees && show && selected && modalInfo ? (
+        <ModalContent id={modalInfo._id} name={modalInfo.username} />
+      ) : null}
     </div>
   );
 }
