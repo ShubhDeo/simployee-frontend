@@ -23,7 +23,7 @@ function DateTime({ joinDate, setJoinDate }) {
           <DesktopDatePicker
             inputFormat="MM/DD/YYYY"
             value={joinDate}
-            onChange={setJoinDate}
+            onChange={(e)=>{setJoinDate(e.$d)}}
             maxDate={current}
             fullWidth={true}
             renderInput={(params) => <TextField {...params} />}
