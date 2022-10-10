@@ -7,6 +7,7 @@ import AddEmployee from "../../Components/AddEmployee";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "./AdminDash.css"
 
 function AdminDash() {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function AdminDash() {
         <AdminNav employees={employees} setEmployees={setEmployees} />
         <div className="text-center">
           <div className="Left">
-            <h4> Employees</h4>
+            <h4> Employees List</h4>
             <br />
             <Pagination
               employees={employees}

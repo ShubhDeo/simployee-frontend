@@ -90,7 +90,7 @@ const AddTask = ({
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Tasks</Modal.Title>
+          <Modal.Title style={{fontFamily: "Poppins", fontWeight: "bolder"}}>Add Tasks</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

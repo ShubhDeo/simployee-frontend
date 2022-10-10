@@ -270,39 +270,40 @@ export default function App({
     return (
       <Modal show={show} onHide={handleClose} size="xl">
         <Modal.Header closeButton>
-          <Modal.Title>{name}</Modal.Title>
+          <Modal.Title style={{fontFamily: "Poppins", fontWeight: "bolder"}}>{name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div style={{ display: "flex" }}>
             {employeeInfoToday ? (
               <div style={{ height: "40vh", width: "50%" }}>
-                <h3>{name}'s Statistics for today</h3>
+                <h4>{name}'s Statistics for today</h4>
                 <Piechart data={employeeInfoToday} />
               </div>
             ) : (
               <div style={{ width: "50%" }}>
-                <h2>No Data available for today</h2>
+                <h4>No Data available for today</h4>
               </div>
             )}
             {employeeInfoPrevious ? (
               <div style={{ height: "40vh", width: "50%" }}>
-                <h3>{name}'s Statistics for yesterday</h3>
+                <h4>{name}'s Statistics for yesterday</h4>
                 <Piechart data={employeeInfoPrevious} />
               </div>
             ) : (
               <div style={{ width: "50%" }}>
-                <h2>No Data available for yesterday</h2>
+                <h4>No Data available for yesterday</h4>
               </div>
             )}
           </div>
           {/* Bar Chart */}
           {employeeInfoWeek ? (
-            <div style={{ height: "40vh", width: "100%" }}>
+            <div style={{ height: "40vh", width: "100%", marginTop: "100px" }}>
+              <h4>{name}'s Statistics for last week</h4>
               <Barchart data={employeeInfoWeek} />
             </div>
           ) : (
             <div style={{ marginTop: "25%" }}>
-              <h3>Weekly data is unavailable</h3>
+              <h4>Weekly data is unavailable</h4>
             </div>
           )}
         </Modal.Body>

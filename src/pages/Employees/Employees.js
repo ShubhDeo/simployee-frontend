@@ -11,6 +11,7 @@ import axios from "axios";
 // import { TempleBuddhistOutlined } from "@mui/icons-material";
 import { parseNonNullablePickerDate } from "@mui/x-date-pickers/internals";
 import {Row, Col} from 'react-bootstrap'
+import './Employee.css'
 
 function Employees() {
   const colors = [
@@ -204,7 +205,7 @@ function Employees() {
         {employeeInfoToday && (
           <Col xs={12} lg={6} className="mb-5">
             <div style={{ height: "40vh", width: "100%", textAlign: "center" }}>
-            <h2>Your Statistics for Today</h2>
+            <h4>Your Statistics for Today</h4>
             <Piechart data={employeeInfoToday} />
           </div>
           </Col>
@@ -213,7 +214,7 @@ function Employees() {
         {employeeInfoPrevious && (
           <Col xs={12} lg={6} className="mb-5">
             <div style={{ height: "40vh", width: "100%", textAlign: "center" }}>
-            <h2>Your Statistics for Yesterday</h2>
+            <h4>Your Statistics for Yesterday</h4>
             <Piechart data={employeeInfoPrevious} />
           </div>
           </Col>
@@ -245,7 +246,7 @@ function Employees() {
               margin: "0px auto 0 auto",
             }}
           >
-            <h2 style={{ textAlign: "center" }}>Weekly Statistics for Tasks</h2>
+            <h4 style={{ textAlign: "center" }}>Weekly Statistics for Tasks</h4>
             <Barchart data={employeeInfoWeek} />
           </div>
         </div>
