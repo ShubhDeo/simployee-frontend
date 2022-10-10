@@ -62,11 +62,11 @@ function Employees() {
           "Total Minutes": 0,
         },
         {
-          "Task Type": "Working",
+          "Task Type": "Meetings",
           "Total Minutes": 0,
         },
         {
-          "Task Type": "Meetings",
+          "Task Type": "Work",
           "Total Minutes": 0,
         },
       ];
@@ -181,6 +181,8 @@ function Employees() {
         setEmployeeInfoToday={setEmployeeInfoToday}
         employeeInfoPrevious={employeeInfoPrevious}
         setEmployeeInfoPrevious={setEmployeeInfoPrevious}
+        employeeInfoWeek={employeeInfoWeek}
+        setEmployeeInfoWeek={setEmployeeInfoWeek}
       />
       <div
         style={{

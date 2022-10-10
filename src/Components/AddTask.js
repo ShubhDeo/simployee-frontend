@@ -13,6 +13,8 @@ const AddTask = ({
   setEmployeeInfoToday,
   employeeInfoPrevious,
   setEmployeeInfoPrevious,
+  employeeInfoWeek,
+  setEmployeeInfoWeek,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -44,7 +46,13 @@ const AddTask = ({
       let date=new Date();
       startTime.setUTCHours(0,0,0,0);
       date.setUTCHours(0,0,0,0);
-      console.log(startTime,date);
+      // console.log(startTime,date);
+      let tempInfoWeek = employeeInfoWeek.slice(0);
+      // console.log(tempInfoWeek);
+      let timeWeekInfo = parseInt(tempInfoWeek[taskType - 1]["Total Minutes"]);
+      // console.log(timeWeekInfo);
+      tempInfoWeek[taskType - 1]["Total Minutes"] = timeWeekInfo+parseInt(timeTaken);
+      setEmployeeInfoWeek(tempInfoWeek);
       if(date.getTime()===startTime.getTime()){
         let temp=employeeInfoToday.slice(0);
         // console.log(temp);

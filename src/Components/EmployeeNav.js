@@ -19,6 +19,8 @@ function EmployeeNav({
   setEmployeeInfoToday,
   employeeInfoPrevious,
   setEmployeeInfoPrevious,
+  employeeInfoWeek,
+  setEmployeeInfoWeek,
 }) {
   const navigate = useNavigate();
   // console.log(employeeDetails.username)
@@ -47,6 +49,8 @@ function EmployeeNav({
                 setEmployeeInfoToday={setEmployeeInfoToday}
                 employeeInfoPrevious={employeeInfoPrevious}
                 setEmployeeInfoPrevious={setEmployeeInfoPrevious}
+                employeeInfoWeek={employeeInfoWeek}
+                setEmployeeInfoWeek={setEmployeeInfoWeek}
               />
             </NavDropdown.Item>
             <NavDropdown.Item>
