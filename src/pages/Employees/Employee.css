@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+#nav {
+  background-color: #074a98;
+  font-family: 'Poppins', sans-serif;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+h2 {
+  font-family: 'Poppins';
+}
+
+h4 {
+  font-family: 'Poppins';
+  font-weight: bolder;
+}
+
+
+#nav-text {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+#nav-btn {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+}
+#employee-bg {
+    background-color: #d2deec ;
+    
+}
+
+@media (max-width: 1000px) {
+  #nav {
+    height: 130px;
+  }
+}
+
+@media (max-width: 600px) {
+  #nav-text {
+    font-size: 1.5rem;
+  }
+}

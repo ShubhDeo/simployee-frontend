@@ -3,11 +3,9 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import DateTime from "./DateTime";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import MomentUtils from "@date-io/moment";
 import TextField from "@mui/material/TextField";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 
 const PopupForm = () => {
   const [show, setShow] = useState(false);
@@ -16,7 +14,12 @@ const PopupForm = () => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button
+        variant="transparent"
+        className="text-black"
+        style={{ marginRight: "10px", border: "none" }}
+        onClick={handleShow}
+      >
         Add Tasks
       </Button>
 
@@ -58,9 +61,7 @@ const PopupForm = () => {
             <Form.Group className="mb-3">
               <Form.Label>Select Date and Start Time</Form.Label>
               <br />
-              <MuiPickersUtilsProvider utils={MomentUtils}>
-                <DateTime />
-              </MuiPickersUtilsProvider>
+              <DateTime />
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -73,7 +74,7 @@ const PopupForm = () => {
                 // label="Multiline"
                 // multiline
                 // rows={1}
-                type={'number'}
+                type={"number"}
                 fullWidth={true}
               />
             </Form.Group>
